@@ -35,11 +35,16 @@ const app = express(); // create the Express application
 // 1. CORS — Cross-Origin Resource Sharing
 //    Allows React (port 5173 in dev) to call our API (port 3000).
 //    Without this, the browser blocks requests between different origins.
+// app.use(cors({
+//   origin: process.env.NODE_ENV === 'production'
+//     ? false                           // in production, React is served by Express itself
+//     : 'http://localhost:5173',        // allow Vite dev server
+//   credentials: true,                  // allow cookies and Authorization headers
+// }));
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production'
-    ? false                           // in production, React is served by Express itself
-    : 'http://localhost:5173',        // allow Vite dev server
-  credentials: true,                  // allow cookies and Authorization headers
+  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  credentials: true,
 }));
 
 // 2. JSON body parser
