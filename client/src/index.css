@@ -1,0 +1,80 @@
+/* These three lines are the entire "setup" for Tailwind.
+   @tailwind base      — resets browser default styles (margins, padding, etc.)
+   @tailwind components — Tailwind's built-in component classes
+   @tailwind utilities  — ALL the utility classes: p-4, text-blue-500, flex, etc.
+
+   Tailwind's build step replaces these directives with only the
+   CSS classes your project actually uses. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Global base styles ───────────────────────────────────────── */
+/* The @layer directive adds custom styles into Tailwind's layers
+   so they interact correctly with Tailwind's own rules. */
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900 font-sans;
+    /* @apply lets you use Tailwind classes inside CSS — 
+       equivalent to className="bg-gray-50 text-gray-900 font-sans" */
+  }
+
+  /* Make all headings use a consistent weight */
+  h1, h2, h3, h4 {
+    @apply font-semibold;
+  }
+
+  /* Smooth scrolling everywhere */
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Reusable button base — extend with variant classes */
+  .btn {
+    @apply inline-flex items-center justify-center
+           px-4 py-2 rounded-lg font-medium text-sm
+           transition-colors duration-150 focus:outline-none
+           focus:ring-2 focus:ring-offset-2 disabled:opacity-50
+           disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary-700 text-white hover:bg-primary-600
+           focus:ring-primary-500;
+  }
+
+  .btn-danger {
+    @apply btn bg-red-600 text-white hover:bg-red-700
+           focus:ring-red-500;
+  }
+
+  .btn-outline {
+    @apply btn border border-gray-300 text-gray-700
+           hover:bg-gray-50 focus:ring-gray-400;
+  }
+
+  /* Reusable form input */
+  .input {
+    @apply w-full px-3 py-2 border border-gray-300 rounded-lg
+           text-sm focus:outline-none focus:ring-2
+           focus:ring-primary-500 focus:border-primary-500
+           disabled:bg-gray-100 disabled:cursor-not-allowed;
+  }
+
+  /* Card container */
+  .card {
+    @apply bg-white rounded-xl border border-gray-200 shadow-sm;
+  }
+
+  /* Table cell */
+  .td {
+    @apply px-4 py-3 text-sm text-gray-700 border-b border-gray-100;
+  }
+
+  .th {
+    @apply px-4 py-3 text-xs font-semibold text-gray-500
+           uppercase tracking-wider bg-gray-50 border-b border-gray-200;
+  }
+}
